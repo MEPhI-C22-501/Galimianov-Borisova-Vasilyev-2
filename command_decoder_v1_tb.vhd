@@ -9,9 +9,7 @@ architecture sim of tb_decoder is
 
 	signal clk         	: std_logic;
 	signal i_rst         	: std_logic;
-	signal i_load        	: std_logic;
 	signal i_instr       	: std_logic_vector(31 downto 0);
-	signal o_instr_addr  	: std_logic_vector(31 downto 0);
 	signal o_r_type      	: std_logic;
 	signal o_s_type      	: std_logic;
 	signal o_i_type      	: std_logic;
@@ -22,19 +20,13 @@ architecture sim of tb_decoder is
 	signal o_rd          	: std_logic_vector(4 downto 0);
 	signal o_read_to_LSU 	: std_logic;
 	signal o_write_to_LSU 	: std_logic;
-	signal o_read_to_ALU 	: std_logic;
-	signal o_opcode_to_LSU 	: std_logic_vector(6 downto 0);
 	signal o_LSU_code	: std_logic_vector(16 downto 0);
-
-	signal o_DEBUG_LSU_0		: std_logic_vector(5 downto 0);
     
  component command_decoder_v1
 	  port (
 			  i_clk         	: in std_logic;
 			  i_rst         	: in std_logic;
-			  i_load        	: in std_logic;
 			  i_instr       	: in std_logic_vector(31 downto 0);
-			  o_instr_addr  	: out std_logic_vector(31 downto 0);
 			  o_r_type      	: out std_logic;
 			  o_s_type      	: out std_logic;
 			  o_i_type      	: out std_logic;
@@ -45,11 +37,7 @@ architecture sim of tb_decoder is
 			  o_rd          	: out std_logic_vector(4 downto 0);
 			  o_read_to_LSU 	: out std_logic;
 			  o_write_to_LSU 	: out std_logic;
-			  o_read_to_ALU 	: out std_logic;
-			  o_opcode_to_LSU : out std_logic_vector(6 downto 0);
-			  o_LSU_code		: out std_logic_vector(16 downto 0);
-
-			  o_DEBUG_LSU_0		: out std_logic_vector(5 downto 0)
+			  o_LSU_code		: out std_logic_vector(16 downto 0)
 
 		);
  end component;
@@ -58,9 +46,7 @@ architecture sim of tb_decoder is
 	  port (
 			  i_clk         	: out std_logic;
 			  i_rst         	: out std_logic;
-			  i_load        	: out std_logic;
 			  i_instr       	: out std_logic_vector(31 downto 0);
-			  o_instr_addr  	: in std_logic_vector(31 downto 0);
 			  o_r_type      	: in std_logic;
 			  o_s_type      	: in std_logic;
 			  o_i_type      	: in std_logic;
@@ -71,11 +57,7 @@ architecture sim of tb_decoder is
 			  o_rd          	: in std_logic_vector(4 downto 0);
 			  o_read_to_LSU 	: in std_logic;
 			  o_write_to_LSU 	: in std_logic;
-			  o_read_to_ALU 	: in std_logic;
-			  o_opcode_to_LSU : in std_logic_vector(6 downto 0);
-			  o_LSU_code		: in std_logic_vector(16 downto 0);
-
-			  o_DEBUG_LSU_0		: in std_logic_vector(5 downto 0)
+			  o_LSU_code		: in std_logic_vector(16 downto 0)
 		);
  end component;
 
@@ -84,9 +66,7 @@ begin
         port map (
 				i_clk 				=> clk,        	
 				i_rst         		=> i_rst,
-				i_load        		=> i_load,
 				i_instr       		=> i_instr,
-				o_instr_addr  		=> o_instr_addr,	
 				o_r_type      		=> o_r_type,	
 				o_s_type    		=> o_s_type,  	
 				o_i_type     		=> o_i_type, 	
@@ -97,10 +77,7 @@ begin
 				o_rd    				=> o_rd,      	
 				o_read_to_LSU 		=> o_read_to_LSU,
 				o_write_to_LSU 	=> o_write_to_LSU,
-				o_read_to_ALU 		=> o_read_to_ALU,
-				o_opcode_to_LSU 	=> o_opcode_to_LSU,
-				o_LSU_code			=> o_LSU_code,
-				o_DEBUG_LSU_0 => o_DEBUG_LSU_0
+				o_LSU_code			=> o_LSU_code
         );
 
     -- Вызов тестера
@@ -108,9 +85,7 @@ begin
         port map (
             i_clk 				=> clk,        	
 				i_rst         		=> i_rst,
-				i_load        		=> i_load,
 				i_instr       		=> i_instr,
-				o_instr_addr  		=> o_instr_addr,	
 				o_r_type      		=> o_r_type,	
 				o_s_type    		=> o_s_type,  	
 				o_i_type     		=> o_i_type, 	
@@ -121,9 +96,6 @@ begin
 				o_rd    				=> o_rd,      	
 				o_read_to_LSU 		=> o_read_to_LSU,
 				o_write_to_LSU 	=> o_write_to_LSU,
-				o_read_to_ALU 		=> o_read_to_ALU,
-				o_opcode_to_LSU 	=> o_opcode_to_LSU,
-				o_LSU_code			=> o_LSU_code,
-				o_DEBUG_LSU_0 => o_DEBUG_LSU_0
+				o_LSU_code			=> o_LSU_code
         );
 end sim;
