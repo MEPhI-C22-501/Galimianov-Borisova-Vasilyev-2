@@ -1,4 +1,4 @@
-## ВНИМАНИЕ!!! В версии v1_beta возможны ошибки, дождитесь release версии в начале декабря
+## Выложена версия release_v1 
 # RISC-V Instruction Table
 
 ## Load Instructions
