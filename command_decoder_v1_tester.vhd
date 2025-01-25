@@ -1,28 +1,60 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use work.csr_array_pkg.all;
 
-entity instruction_decoder_tester is
+-- Suffix v_ used to analysis signal between devices in modeling scheme
+
+entity decoder_LSU_tester is
     port (
-		i_clk         	: out std_logic;
-		i_rst         	: out std_logic;
-		i_instr       	: out std_logic_vector(31 downto 0);
-		o_r_type      	: in std_logic;
-		o_s_type      	: in std_logic;
-		o_i_type      	: in std_logic;
-		o_opcode      	: in std_logic_vector(6 downto 0);
-		o_rs1         	: in std_logic_vector(4 downto 0);
-		o_rs2         	: in std_logic_vector(4 downto 0);
-		o_imm		    	: in std_logic_vector(11 downto 0);
-		o_rd          	: in std_logic_vector(4 downto 0);
-		o_read_to_LSU 	: in std_logic;
-		o_write_to_LSU 	: in std_logic;
-		o_LSU_code		: in std_logic_vector(16 downto 0)
+		-- General ports to decoder and LSU
+	 
+		i_clk         				: out std_logic;
+		i_rst         				: out std_logic;
+		
+		-- Ports to decoder
+		
+		i_instr       				: out std_logic_vector(31 downto 0);
+		
+		-- ports from decoder
+		
+		o_write_to_LSU 			: in std_logic;
+		o_rs1         				: in std_logic_vector(4 downto 0);
+		o_rs2         				: in std_logic_vector(4 downto 0);
+		o_imm		    				: in std_logic_vector(11 downto 0);
+		o_rd          				: in std_logic_vector(4 downto 0);
+		o_LSU_code					: in std_logic_vector(16 downto 0);
+		o_LSU_code_post 			: in std_logic_vector(16 downto 0);
+		o_LSU_reg_or_memory		: in std_logic;
+		
+		-- ports to LSU
+		
+		i_write_enable_decoder 	: in std_logic;
+      i_opcode_decoder			: in std_logic_vector (16 downto 0); 
+		i_opcode_write_decoder 	: in std_logic_vector (16 downto 0);
+      i_rs1_decoder				: in std_logic_vector (4 downto 0); 
+		i_rs2_decoder				: in std_logic_vector (4 downto 0); 
+		i_rd_decoder 				: in std_logic_vector (4 downto 0);
+      i_rd_ans 					: in std_logic_vector (31 downto 0);
+      i_imm_decoder 				: in std_logic_vector (11 downto 0);
+      i_rs_csr 					: in csr_array;
+		
+		-- Ports from LSU
 
-    );
-end entity instruction_decoder_tester;
+		o_write_enable_memory 	: in std_logic;
+		o_write_enable_csr 		: in std_logic;
+		o_rs_csr 					: in csr_array;
+		o_opcode_alu 				: in std_logic_vector (16 downto 0);
+		o_rs1_alu, o_rs2_alu 	: in std_logic_vector (31 downto 0);
+		o_addr_memory				: in std_logic_vector (15 downto 0);
+		o_write_data_memory		: in std_logic_vector (31 downto 0);
+		o_rd_csr 					: in std_logic_vector (4 downto 0)
+		
+		);
+		
+end entity decoder_LSU_tester;
 
-architecture tester of instruction_decoder_tester is
+architecture tester of decoder_LSU_tester is
     signal clk : std_logic := '0';
     constant clk_period : time := 10 ns;
 begin
