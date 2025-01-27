@@ -161,11 +161,11 @@ begin
 		
 		
 		-- S-type
-		if (i_instr(6 downto 0) = "0110011") then
+		if (i_instr(6 downto 0) = "0100011") then
 			 o_read_to_LSU <= '1';
 		end if;
 
-		if (i_instr(6 downto 0) = "0110011") then
+		if (i_instr(6 downto 0) = "0100011") then
 			 reg_stage_LSU_1(22) <= '0';
 		end if;
 		
@@ -179,20 +179,20 @@ begin
 
 		if (i_instr(6 downto 0) = "0100011") then
 			 o_imm(4 downto 0) <= i_instr(11 downto 7);
-			 o_imm(5 downto 11) <= i_instr(31 downto 25);
+			 o_imm(11 downto 5) <= i_instr(31 downto 25);
 		end if;
 		
-		if (i_instr(6 downto 0) = "0000011" or i_instr(6 downto 0) = "0010011") then
+		if (i_instr(6 downto 0) = "0100011") then
 			 o_LSU_code(2 downto 0) <= i_instr(14 downto 12);
 			 reg_stage_LSU_1(2 downto 0) <= i_instr(14 downto 12);
 		end if;
 		
-		if (i_instr(6 downto 0) = "0000011" or i_instr(6 downto 0) = "0010011") then
+		if (i_instr(6 downto 0) = "0100011") then
 			 o_LSU_code(9 downto 3) <= (others => '0');
 			 reg_stage_LSU_1(9 downto 3) <= (others => '0');
 		end if;
 		
-		if (i_instr(6 downto 0) = "0000011" or i_instr(6 downto 0) = "0010011") then
+		if (i_instr(6 downto 0) = "0100011") then
 			 o_LSU_code(16 downto 10) <= i_instr(6 downto 0);
 			 reg_stage_LSU_1(16 downto 10) <= i_instr(6 downto 0);
 		end if;
